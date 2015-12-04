@@ -9,3 +9,4 @@ choff
 Daniel diaz
 Daniel felipe marin
 Alejandro E. Rendon <alejorendon@utp.edu.co>
+Juan Sebastián Vega Patiño <sebas060495@hotmail.com>
