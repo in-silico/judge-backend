@@ -5,3 +5,6 @@ Yefri: yefri.gaitan97@gmail.com
 Hector F. Jimenez
 Douglas fullarukad@hotmail.com
 Jorge Mario Gil
+choff
+Daniel diaz
+Daniel felipe marin
