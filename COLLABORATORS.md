@@ -1,7 +1,7 @@
-Sebastian Duque Restrepo
 
 Please add your name :D
 
+Sebastian Duque Restrepo
 Leiver: leiverandres@utp.edu.co
 Yefri: yefri.gaitan97@gmail.com
 Hector F. Jimenez
@@ -12,3 +12,4 @@ Daniel diaz
 Daniel felipe marin
 Alejandro E. Rendon <alejorendon@utp.edu.co>
 Juan Sebastián Vega Patiño <sebas060495@hotmail.com>
+Manuel Pineda <manuel.felipe.pineda@gmail.com>
