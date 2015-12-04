@@ -1,7 +1,7 @@
 
 Please add your name :D
 
-Sebastian Duque Restrepo
+Sebastian Duque Restrepo <sebas.duque@utp.edu.co>
 Leiver: leiverandres@utp.edu.co
 Yefri: yefri.gaitan97@gmail.com
 Hector F. Jimenez
