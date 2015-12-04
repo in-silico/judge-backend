@@ -1,2 +1,6 @@
 Please add your name :D
-Woow emogi Hector F. Jimenez
+
+
+Hector F. Jimenez
+Douglas fullarukad@hotmail.com
+Jorge Mario Gil
