@@ -1,2 +1,3 @@
 Please add your name :D
-sebasvega95
+Juan Sebastián Vega Patiño <sebas060495@hotmail.com>
+
