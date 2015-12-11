@@ -9,7 +9,7 @@ The second aim for this backend service is to talk with the
 [judge-bot](https://github.com/in-silico/judge-bot) service. This communication
 will use the [ZeroMQ](http://zeromq.org/) library.
 
-## RESTfull API
+## RESTful API
 
 To be defined.
 
@@ -49,7 +49,7 @@ Documentation
 Licensing
 =========
 
-The library is released under the MPLv2 license.
+The project is released under the MPLv2 license.
 
 Please see LICENSE for full details.
 
