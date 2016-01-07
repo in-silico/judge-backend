@@ -1,0 +1,29 @@
+{
+  "name": "judge-backend",
+  "version": "0.0.1",
+  "description": "Backend service for UTPJudge project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "tap test/*.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/in-silico/judge-backend.git"
+  },
+  "author": "Manuel Pineda <manuel.felipe.pineda@gmail.com> (http://github.com/pin3da)",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/in-silico/judge-backend/issues"
+  },
+  "homepage": "https://github.com/in-silico/judge-backend#readme",
+  "devDependencies": {
+    "tap": "^5.0.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "debug": "^2.2.0",
+    "express": "^4.13.3",
+    "morgan": "^1.6.1"
+  }
+}
