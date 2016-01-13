@@ -13,7 +13,13 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 
 ## RESTful API
 
-To be defined.
+
+| url           | method        | description   | notes         |
+| ------------- | ------------- | ------------- | ------------- |
+| /users        | GET           |   |  |
+| /users        | GET           |   |  |
+| /users        | GET           |   |  |
+
 
 ## ZerMQ API.
 
@@ -30,16 +36,44 @@ Requirements/Dependencies
 Installation
 ============
 
-
     npm install
 
+Testing
+=======
+
+    npm run test
 
 
 Run
 ===
 
-
     npm start
+
+Using judgebot from command line
+================================
+
+The judge-backend can be used with [curl](https://en.wikipedia.org/wiki/CURL), here you have some examples.
+
+We strongly recommend you to use [prettyJSON](https://www.npmjs.com/package/prettyjson)
+
+- create a new user:
+
+        $ curl -H "Content-Type: application/json" -X POST -d '{"name": "Toby"}' localhost:8080/users | prettyjson 
+    
+    You will receive the following:
+    
+        __v:       0
+        updatedAt: 2016-01-13T19:25:59.000Z
+        createdAt: 2016-01-13T19:25:59.000Z
+        _id:       5696a4c78acb3a8559df3371
+        username:  
+        email:     
+        name:      Toby
+
+- get all the users:
+
+        curl localhost:8080/users | prettyjson 
+
 
 
 
