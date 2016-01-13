@@ -16,9 +16,10 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 
 | url           | method        | description   | notes         |
 | ------------- | ------------- | ------------- | ------------- |
-| /users        | GET           |   |  |
-| /users        | GET           |   |  |
-| /users        | GET           |   |  |
+| /users        | GET           | returns all the users      |  |
+| /users        | POST          | create new user            |  |
+| /problems     | GET           | returns all the problems   |  |
+| /problems     | POST          | create new problem         |  |
 
 
 ## ZerMQ API.
