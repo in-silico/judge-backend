@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 
 require('./routes/users')(app, '/users');
 require('./routes/problems')(app, '/problems');
+require('./routes/submissions')(app, '/submissions');
 
 
 var server = http.createServer(app);

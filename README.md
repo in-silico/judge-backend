@@ -20,6 +20,9 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | /users        | POST          | create new user            |  |
 | /problems     | GET           | returns all the problems   |  |
 | /problems     | POST          | create new problem         |  |
+| /submissions  | GET           | returns all the submissions|  |
+| /submissions  | POST          | create new submission      |  |
+| /submissions/pending  | GET   | returns all the pending submissions|  |
 
 
 ## ZerMQ API.
@@ -59,21 +62,21 @@ We strongly recommend you to use [prettyJSON](https://www.npmjs.com/package/pret
 
 - create a new user:
 
-        $ curl -H "Content-Type: application/json" -X POST -d '{"name": "Toby"}' localhost:8080/users | prettyjson 
-    
+        $ curl -H "Content-Type: application/json" -X POST -d '{"name": "Toby"}' localhost:8080/users | prettyjson
+
     You will receive the following:
-    
+
         __v:       0
         updatedAt: 2016-01-13T19:25:59.000Z
         createdAt: 2016-01-13T19:25:59.000Z
         _id:       5696a4c78acb3a8559df3371
-        username:  
-        email:     
+        username:
+        email:
         name:      Toby
 
 - get all the users:
 
-        curl localhost:8080/users | prettyjson 
+        curl localhost:8080/users | prettyjson
 
 
 
