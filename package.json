@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "tap test/*.js",
-    "start": "node app.js"
+    "start": "node bin/www"
   },
   "repository": {
     "type": "git",
