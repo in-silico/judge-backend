@@ -24,6 +24,6 @@ server.listen(port, function(err) {
 
 process.on('SIGINT', function() {
   console.log("\nShutdown the server, bye (:".yellow);
-  db.close();
+  app.db.close();
   process.exit();
 });

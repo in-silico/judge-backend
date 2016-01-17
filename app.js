@@ -10,9 +10,9 @@ var config = require('./config/' + env);
 
 var app = express();
 mongoose.connect(config.db.url);
-var db = mongoose.connection;
+app.db = mongoose.connection;
 
-db.on('open', function() {
+app.db.on('open', function() {
   console.log('connected to db'.yellow);
 });
 
@@ -22,5 +22,11 @@ app.use(bodyParser.json());
 require('./routes/users')(app, '/users');
 require('./routes/problems')(app, '/problems');
 require('./routes/submissions')(app, '/submissions');
+
+
+/// catch 404 and forwarding to error handler
+app.use(function(req, res, next) {
+  res.status(404).json({ok: "false", error: "not found"});
+});
 
 module.exports = app;
