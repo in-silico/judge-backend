@@ -14,17 +14,18 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 ## RESTful API
 
 
-| url                     | method   | description                | notes / examples |
+| url                     | method   | description                | params |
 | ----------------------- | -------- | -------------------------- | ------------- |
 | /users                  | GET      | returns all the users      |  |
-| /users                  | POST     | create new user            |  |
+| /users                  | POST     | creates a new user            | <ul> <li> email </li> <li> name </li> <li> username </li> </ul> |
 | /problems               | GET      | returns all the problems   |  |
-| /problems               | POST     | create new problem         |  |
+| /problems               | POST     | creates a new problem         | <ul> <li> author </li> <li> description </li> <li> title </li> </ul> |
 | /submissions            | GET      | returns all the submissions|  |
-| /submissions            | POST     | create new submission      |  |
+| /submissions            | POST     | creates a new submission   | <ul> <li> problem\_id </li> <li> user\_id, <b>temporal</b>: must be taken from session </li> <li> source_code: attached as multipart/form file </li> </ul> |
 | /submissions/pending    | GET      | returns all the pending submissions|  |
 | /contests               | GET      | returns all the contests   |  |
-| /contests/add/:id       | POST     | add an specific problem to a contest with id equals to :id | {"problem\_id": "569c05394d91caf85fdbd6e4" } |
+| /contests               | POST     | creates a new contests     | <ul> <li> description </li> <li> title </li> </ul> |
+| /contests/add/:id       | POST     | add an specific problem to a contest with id equals to :id | <ul> <li> problem_id </li> </ul> |
 
 
 ## ZerMQ API.
