@@ -4,8 +4,9 @@
   "description": "Backend service for UTPJudge project.",
   "main": "app.js",
   "scripts": {
-    "test": "tap test/*.js",
-    "start": "node bin/www"
+    "postinstall": "mkdir -p data && mkdir -p data/submissions && mkdir -p data/problems",
+    "start": "node bin/www",
+    "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "debug": "^2.2.0",
     "express": "^4.13.3",
     "mongoose": "^4.3.5",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "multer": "^1.1.0"
   }
 }

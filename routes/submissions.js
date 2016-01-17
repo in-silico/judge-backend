@@ -1,4 +1,7 @@
-var express = require('express');
+var express = require('express'),
+    multer  = require('multer');
+
+var upload = multer({dest: 'data/submissions/'});
 var router = express.Router();
 
 var Submission = require('../models/submission');
@@ -11,7 +14,8 @@ module.exports = function(app, mountPoint) {
     });
   });
 
-  router.post('/', function(req, res) {
+  router.post('/', upload.any(), function(req, res) {
+    req.body.source_code = req.files;
     Submission.create(req.body, function(err, data) {
       if (err) throw err;
       res.json(data);

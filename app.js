@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 require('./routes/users')(app, '/users');
 require('./routes/problems')(app, '/problems');
 require('./routes/submissions')(app, '/submissions');
+require('./routes/contests')(app, '/contests');
 
 
 /// catch 404 and forwarding to error handler

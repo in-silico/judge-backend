@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var problemSchema = new Schema({
-  title: { type: String, default: '' },
+  author: { type: String, default: '' },
   description: { type: String, default: '' },
-  author: { type: String, default: '' }
+  testcases: { type: Array, default: []},
+  title: { type: String, default: '' }
 }, {timestamps : true});
 
 

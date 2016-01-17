@@ -14,15 +14,17 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 ## RESTful API
 
 
-| url           | method        | description   | notes         |
-| ------------- | ------------- | ------------- | ------------- |
-| /users        | GET           | returns all the users      |  |
-| /users        | POST          | create new user            |  |
-| /problems     | GET           | returns all the problems   |  |
-| /problems     | POST          | create new problem         |  |
-| /submissions  | GET           | returns all the submissions|  |
-| /submissions  | POST          | create new submission      |  |
-| /submissions/pending  | GET   | returns all the pending submissions|  |
+| url                     | method   | description                | notes / examples |
+| ----------------------- | -------- | -------------------------- | ------------- |
+| /users                  | GET      | returns all the users      |  |
+| /users                  | POST     | create new user            |  |
+| /problems               | GET      | returns all the problems   |  |
+| /problems               | POST     | create new problem         |  |
+| /submissions            | GET      | returns all the submissions|  |
+| /submissions            | POST     | create new submission      |  |
+| /submissions/pending    | GET      | returns all the pending submissions|  |
+| /contests               | GET      | returns all the contests   |  |
+| /contests/add/:id       | POST     | add an specific problem to a contest with id equals to :id | {"problem\_id": "569c05394d91caf85fdbd6e4" } |
 
 
 ## ZerMQ API.
@@ -79,6 +81,10 @@ We strongly recommend you to use [prettyJSON](https://www.npmjs.com/package/pret
         curl localhost:8080/users | prettyjson
 
 
+- submmit solution:
+
+
+        curl -X POST -F "data=@solution.cc" localhost:8080/submissions | prettyjson
 
 
 Contributing
@@ -92,9 +98,6 @@ we use that guide as reference.
 Please feel free to add yourself to the
 [COLLABORATORS](https://github.com/in-silico/judge-backend/blob/master/COLLABORATORS)
 file in an alphanumerically sorted way before you raise the pull request.
-
-Documentation
-=============
 
 
 Licensing
