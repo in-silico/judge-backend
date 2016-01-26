@@ -1,6 +1,8 @@
 judge-backend
 =============
 
+![dependencies](https://david-dm.org/in-silico/judge-backend.svg)
+
 Backend service for UTPJudge project, basically aims to serve the info
 (statements, constraints, etc) for programming contests through a
 [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer).
