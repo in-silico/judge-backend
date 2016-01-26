@@ -1,7 +1,7 @@
 judge-backend
 =============
 
-![dependencies](https://david-dm.org/in-silico/judge-backend.svg)
+[![Dependency Status](https://david-dm.org/in-silico/judge-backend.svg)](https://david-dm.org/in-silico/judge-backend)
 
 Backend service for UTPJudge project, basically aims to serve the info
 (statements, constraints, etc) for programming contests through a
