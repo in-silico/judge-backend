@@ -14,6 +14,7 @@ module.exports = function(app, mountPoint) {
   router.post('/', function(req, res) {
     Contest.create(req.body, function(err, data) {
       if (err) throw err;
+      res.setHeader('Access-Control-Allow-Origin','*');
       res.json(data);
     });
   });
