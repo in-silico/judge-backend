@@ -13,7 +13,7 @@ var app = express();
 mongoose.connect(config.db.url);
 app.db = mongoose.connection;
 
-app.options('/contests', cors());
+app.use(cors());
 
 app.db.on('open', function() {
   console.log('connected to db'.yellow);
