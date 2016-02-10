@@ -3,6 +3,7 @@ var express = require('express'),
     colors  = require('colors'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser');
+    cors = require('cors');
 
 
 var env = process.env.NODE_ENV || 'development';
@@ -11,6 +12,8 @@ var config = require('./config/' + env);
 var app = express();
 mongoose.connect(config.db.url);
 app.db = mongoose.connection;
+
+app.use(cors());
 
 app.db.on('open', function() {
   console.log('connected to db'.yellow);
