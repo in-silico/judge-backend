@@ -30,7 +30,7 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | /contests/add/:id       | POST     | add an specific problem to a contest with id equals to :id | <ul> <li> problem_id </li> </ul> |
 
 
-## ZerMQ API.
+## ZeroMQ API.
 
 To be defined.
 
