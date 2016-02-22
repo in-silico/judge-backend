@@ -11,6 +11,14 @@ module.exports = function(app, mountPoint) {
     })
   });
 
+  router.get('/:id', function(req, res) {
+    Contest.find({_id: req.params.id}, function(err, ans) {
+      if (err)
+        return res.status(500).json(err);
+      return res.json(ans[0]);
+    })
+  });
+
   router.post('/', function(req, res) {
     Contest.create(req.body, function(err, data) {
       if (err) throw err;
