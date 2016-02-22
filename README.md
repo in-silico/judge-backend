@@ -21,12 +21,14 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | /users                  | GET      | returns all the users      |  |
 | /users                  | POST     | creates a new user            | <ul> <li> email </li> <li> name </li> <li> username </li> </ul> |
 | /problems               | GET      | returns all the problems   |  |
+| /problems/:id           | GET      | returns a specific problem   |  |
 | /problems               | POST     | creates a new problem         | <ul> <li> author </li> <li> description </li> <li> title </li> </ul> |
 | /problems/tc/:id        | POST     | adds one or more test cases to one problem | You can send a pair of (.in, .out) files or you can send a .tar.gz file with several test cases inside. <br></br> If you decide to send a .tar.gz, take care of the name of files, we will add one test case for each file which the .in and .out match. <br></br> For example, if the .tar.gz contains the files 'a.in', 'a.out' , 'b1.in', 'b3.out', only the test case (a.in, a.out) will be added.|
 | /submissions            | GET      | returns all the submissions|  |
 | /submissions            | POST     | creates a new submission   | <ul> <li> problem\_id </li> <li> contest\_id </li>  <li> user\_id, <b>temporal</b>: must be taken from session </li> <li> source\_code: attached as multipart/form file </li> </ul> |
 | /submissions/pending    | GET      | returns all the pending submissions|  |
 | /contests               | GET      | returns all the contests   |  |
+| /contests/:id           | GET      | returns a specific contest   |  |
 | /contests               | POST     | creates a new contests     | <ul> <li> description </li> <li> title </li> </ul> |
 | /contests/add/:id       | POST     | add one or more problems to a contest with id equals to :id | Object with <ul> <li> problem\_id </li> <li> memory\_limit (optional) </li> <li> time\_limit (optional) </li> </ul> or one array with several objects of that type.|
 
