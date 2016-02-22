@@ -22,12 +22,13 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | /users                  | POST     | creates a new user            | <ul> <li> email </li> <li> name </li> <li> username </li> </ul> |
 | /problems               | GET      | returns all the problems   |  |
 | /problems               | POST     | creates a new problem         | <ul> <li> author </li> <li> description </li> <li> title </li> </ul> |
+| /problems/tc/:id        | POST     | adds one or more test cases to one problem | You can send a pair of (.in, .out) files or you can send a .tar.gz file with several test cases inside |
 | /submissions            | GET      | returns all the submissions|  |
-| /submissions            | POST     | creates a new submission   | <ul> <li> problem\_id </li> <li> user\_id, <b>temporal</b>: must be taken from session </li> <li> source_code: attached as multipart/form file </li> </ul> |
+| /submissions            | POST     | creates a new submission   | <ul> <li> problem\_id </li> <li> contest\_id </li>  <li> user\_id, <b>temporal</b>: must be taken from session </li> <li> source\_code: attached as multipart/form file </li> </ul> |
 | /submissions/pending    | GET      | returns all the pending submissions|  |
 | /contests               | GET      | returns all the contests   |  |
 | /contests               | POST     | creates a new contests     | <ul> <li> description </li> <li> title </li> </ul> |
-| /contests/add/:id       | POST     | add an specific problem to a contest with id equals to :id | <ul> <li> problem_id </li> </ul> |
+| /contests/add/:id       | POST     | add an specific problem to a contest with id equals to :id | <ul> <li> problem\_id </li> </ul> |
 
 
 ## ZeroMQ API.
