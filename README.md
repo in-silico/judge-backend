@@ -28,7 +28,7 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | /submissions/pending    | GET      | returns all the pending submissions|  |
 | /contests               | GET      | returns all the contests   |  |
 | /contests               | POST     | creates a new contests     | <ul> <li> description </li> <li> title </li> </ul> |
-| /contests/add/:id       | POST     | add an specific problem to a contest with id equals to :id | <ul> <li> problem\_id </li> </ul> |
+| /contests/add/:id       | POST     | add one or more problems to a contest with id equals to :id | Object with <ul> <li> problem\_id </li> </ul> or one array with several objects of that type.|
 
 
 ## ZeroMQ API.
