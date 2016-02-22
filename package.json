@@ -31,6 +31,7 @@
     "mongoose": "^4.3.5",
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
+    "passport-github": "^1.1.0",
     "tar.gz": "^1.0.3"
   }
 }
