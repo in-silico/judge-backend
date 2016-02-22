@@ -22,7 +22,10 @@ module.exports = function(app, mountPoint) {
     Contest.find({_id: req.params.id}, function(err, ans) {
       if (err) throw err;
       var contest = ans[0];
-      contest.addProblem(req.body, function(err, data) {
+      if (!Array.isArray(req.body))
+        req.body = [req.body];
+
+      contest.addProblems(req.body, function(err, data) {
         if (err) throw err;
         res.json({ok: true, data: data});
       })

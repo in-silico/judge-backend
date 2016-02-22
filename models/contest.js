@@ -14,8 +14,12 @@ var contestSchema = new Schema({
   title: { type: String, default: '' }
 }, {timestamps : true});
 
-contestSchema.methods.addProblem = function(problem, cb) {
-  this.problems.push(problem);
+contestSchema.methods.addProblems = function(toAdd, cb) {
+  for (var i = 0; i < toAdd.length; ++i) {
+    var problem = toAdd[i];
+    this.problems.push(problem);
+  }
+
   this.save(cb);
 }
 
