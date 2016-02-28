@@ -99,15 +99,13 @@ Set-up judge behind reverse proxy
 
 - Install nginx
 
-
-    aptitude update
-    aptitude install nginx
+        aptitude update
+        aptitude install nginx
 
 - Add basic dns configuration at '/etc/hosts'
 
-
-    127.0.1.1	judge.is
-    127.0.1.1	api.judge.is
+        127.0.1.1	judge.is
+        127.0.1.1	api.judge.is
 
 
 - Add basic configuration for nginx
