@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var getUser = require('../local/get_user');
 
+var env = process.env.NODE_ENV || 'development';
+var config = require('../config/' + env)
+
 
 module.exports = function(app, mountPoint, passport) {
 
@@ -9,7 +12,7 @@ module.exports = function(app, mountPoint, passport) {
       passport.authenticate('github', { failureRedirect: '/login' }),
       function(req, res) {
         // Successful authentication, redirect home.
-        res.redirect('http://judge.is');
+        res.redirect(config.frontend.url);
   });
 
   router.get('/', function(req, res) {
