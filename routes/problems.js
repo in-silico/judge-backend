@@ -89,6 +89,14 @@ module.exports = function(app, mountPoint) {
     })
   });
 
+  router.get('/:id', function(req, res) {
+    Problem.find({_id: req.params.id}, function(err, data) {
+      if (err)
+        return res.status(500).json(err);
+      return res.json(data[0]);
+    })
+  });
+
   router.post('/', function(req, res) {
     Problem.create(req.body, function(err, data) {
       if (err) throw err;
