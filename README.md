@@ -94,55 +94,6 @@ We strongly recommend you to use [prettyJSON](https://www.npmjs.com/package/pret
         curl -X POST -F "data=@solution.cc" localhost:8080/submissions | prettyjson
 
 
-Set-up judge behind reverse proxy
-==================================
-
-- Install nginx
-
-        aptitude update
-        aptitude install nginx
-
-- Add basic dns configuration at '/etc/hosts'
-
-        127.0.1.1	judge.is
-        127.0.1.1	api.judge.is
-
-
-- Add basic configuration for nginx
-
-```
-server {
-  listen 80;
-
-  server_name judge.is;
-
-  location / {
-    proxy_pass http://localhost:8081;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-  }
-}
-
-
-server {
-  listen 80;
-
-  server_name api.judge.is;
-
-  location / {
-    proxy_pass http://localhost:8080;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-  }
-}
-
-```
 
 Contributing
 ============
