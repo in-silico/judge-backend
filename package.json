@@ -27,10 +27,13 @@
     "cors": "^2.7.1",
     "debug": "^2.2.0",
     "express": "^4.13.3",
+    "express-session": "^1.13.0",
     "kerberos": "0.0.17",
     "mongoose": "^4.3.5",
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "tar.gz": "^1.0.3"
   }
 }
