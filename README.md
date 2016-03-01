@@ -49,6 +49,12 @@ Installation
 ============
 
     npm install
+    
+In order to authenticate users with the github API you need to do some
+extra work:
+
+- [Configure a reverse proxy + dns](https://github.com/in-silico/utpjudge#set-up-judge-behind-reverse-proxy)
+- [Get API keys from github](https://github.com/in-silico/utpjudge#get-api-keys-from-github)
 
 Testing
 =======
