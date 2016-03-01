@@ -7,6 +7,7 @@ var express = require('express'),
     GithubStrategy = require('passport-github').Strategy,
     passport = require('passport'),
     expressSession = require('express-session');
+    connectMongo = require('connect-mongo')(expressSession);
 
 
 var env = process.env.NODE_ENV || 'development';
@@ -46,7 +47,12 @@ app.db.on('open', function() {
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(expressSession({
+  secret: 'keyboard cat',
+  store: new connectMongo({mongooseConnection: app.db, ttl: 60 * 60}),
+  resave: true,
+  saveUninitialized: true
+}));
 
 
 app.use(passport.initialize());
