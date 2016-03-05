@@ -104,7 +104,7 @@ module.exports = function(app, mountPoint) {
     });
   });
 
-  router.post('/tc/:id', upload.any(), function(req, res) {
+  router.post('/:id/tc', upload.any(), function(req, res) {
     if (!req.files || req.files.length == 0) {
       return res.status(400).json({
         ok: false,
