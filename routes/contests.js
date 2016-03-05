@@ -26,7 +26,7 @@ module.exports = function(app, mountPoint) {
     });
   });
 
-  router.post('/add/:id', function(req, res) {
+  router.post('/:id/add', function(req, res) {
     Contest.find({_id: req.params.id}, function(err, ans) {
       if (err) throw err;
       var contest = ans[0];
