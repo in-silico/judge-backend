@@ -124,5 +124,19 @@ module.exports = function(app, mountPoint) {
       handleTar(req, res);
   });
 
+  router.put('/', function(req, res) {
+    Problem.update({_id: req.body._id}, req.body, function(err, data) {
+      if (err) throw err;
+      res.json(data);
+    });
+  });
+
+  router.del('/', function(req, res) {
+    Problem.remove({_id: req.body._id}, function(err, data) {
+      if (err) throw err;
+      console.log('The problem has been removed');
+    });
+  });
+
   app.use(mountPoint, router);
 }
