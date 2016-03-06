@@ -38,7 +38,21 @@ module.exports = function(app, mountPoint) {
         res.json({ok: true, data: data});
       })
     })
-  })
+  });
+
+  router.put('/', function(req, res) {
+    Contest.update({_id: req.body._id}, req.body, function(err, data) {
+      if (err) throw err;
+      res.json(data);
+    });
+  });
+
+  router.delete('/', function(req, res) {
+    Contest.remove({_id: req.body._id}, function(err, data) {
+      if (err) throw err;
+      console.log('The contest has been removed');
+    });
+  });
 
   app.use(mountPoint, router);
 }
