@@ -84,7 +84,8 @@ function handleTar(req, res) {
 module.exports = function(app, mountPoint) {
   router.get('/', function(req, res) {
     Problem.find(function(err, data) {
-      if (err) throw err;
+      if (err)
+        return res.status(500).json(err);
       res.json(data);
     })
   });
@@ -99,7 +100,8 @@ module.exports = function(app, mountPoint) {
 
   router.post('/', function(req, res) {
     Problem.create(req.body, function(err, data) {
-      if (err) throw err;
+      if (err)
+        return res.status(500).json(err);
       res.json(data);
     });
   });
@@ -122,6 +124,22 @@ module.exports = function(app, mountPoint) {
       handleSingleFiles(req, res);
     else
       handleTar(req, res);
+  });
+
+  router.put('/:id', function(req, res) {
+    Problem.update({_id: req.params.id}, req.body, function(err, data) {
+      if (err)
+        return res.status(500).json(err);
+      res.json(data);
+    });
+  });
+
+  router.delete('/:id', function(req, res) {
+    Problem.remove({_id: req.params.id}, function(err, data) {
+      if (err)
+        return res.status(500).json(err);
+      return res.json(data);
+    });
   });
 
   app.use(mountPoint, router);

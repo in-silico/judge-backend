@@ -20,10 +20,14 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | ----------------------- | -------- | -------------------------- | ------------- |
 | /users                  | GET      | returns all the users      |  |
 | /users                  | POST     | creates a new user            | <ul> <li> email </li> <li> name </li> <li> username </li> </ul> |
+| /users/:id              | PUT      | modifies user data         | <ul> <li> email </li> <li> name </li> <li> username </li> </ul> |
+| /users/:id              | DELETE   | remove a user              |  |
 | /problems               | GET      | returns all the problems   |  |
 | /problems/:id           | GET      | returns a specific problem   |  |
 | /problems               | POST     | creates a new problem         | <ul> <li> author </li> <li> description </li> <li> title </li> </ul> |
 | /problems/:id/tc        | POST     | adds one or more test cases to one problem | You can send a pair of (.in, .out) files or you can send a .tar.gz file with several test cases inside. <br></br> If you decide to send a .tar.gz, take care of the name of files, we will add one test case for each file which the .in and .out match. <br></br> For example, if the .tar.gz contains the files 'a.in', 'a.out' , 'b1.in', 'b3.out', only the test case (a.in, a.out) will be added.|
+| /problems/:id           | PUT      | modifies problem data         | |
+| /problems/:id           | DELETE   | remove a problem              | |
 | /submissions            | GET      | returns all the submissions|  |
 | /submissions            | POST     | creates a new submission   | <ul> <li> problem\_id </li> <li> contest\_id </li>  <li> user\_id, <b>temporal</b>: must be taken from session </li> <li> source\_code: attached as multipart/form file </li> </ul> |
 | /submissions/pending    | GET      | returns all the pending submissions|  |
@@ -31,7 +35,8 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | /contests/:id           | GET      | returns a specific contest   |  |
 | /contests               | POST     | creates a new contests     | <ul> <li> description </li> <li> title </li> </ul> |
 | /contests/:id/add       | POST     | add one or more problems to a contest with id equals to :id | Object with <ul> <li> problem\_id </li> <li> memory\_limit (optional) </li> <li> time\_limit (optional) </li> </ul> or one array with several objects of that type.|
-
+| /contests/:id         | PUT      | modifies contest data   |  |
+| /contests/:id         | DELETE   | remove a contest        |  |
 
 ## ZeroMQ API.
 
@@ -49,7 +54,7 @@ Installation
 ============
 
     npm install
-    
+
 In order to authenticate users with the github API you need to do some
 extra work:
 
