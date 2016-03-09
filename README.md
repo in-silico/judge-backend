@@ -11,7 +11,7 @@ This API will be used by the
 
 The second aim for this backend service is to talk with the
 [judge-bot](https://github.com/in-silico/judge-bot) service.
-This communication will use the [ZeroMQ](http://zeromq.org/) library.
+
 
 ## RESTful API
 
@@ -33,16 +33,32 @@ This communication will use the [ZeroMQ](http://zeromq.org/) library.
 | /contests/:id/add       | POST     | add one or more problems to a contest with id equals to :id | Object with <ul> <li> problem\_id </li> <li> memory\_limit (optional) </li> <li> time\_limit (optional) </li> </ul> or one array with several objects of that type.|
 
 
-## ZeroMQ API.
+## Bot API.
 
-To be defined.
+All the messages are sent through TCP connections and must be parsable to JSON arrays.
+
+*Important:* All the messages must be ended with the '\0'  character.
+
+The first element in the array defines the type of the operation.
+
+### bot-to-backend messages.
+
+    ['judgement', verdict] : judgement result. An event must be emited with this message.
+    ['ready'] : bot announcing that is ready to judge
+    ['file', path] : file solicitation.
+
+### backend-to-bot messages.
+
+    ['submission', data] : submission solicitation. Exactly format of 'data' will be defined HERE(TO DO).
+    ['file', file_identifier, buffer] : part of the file 'file_identifier' contained into a NodeJS buffer.
+    ['endfile', file_identifier] : Announce that the file 'file_identifier' was completely sent.
 
 
 Requirements/Dependencies
 =========================
 
-- [ZeroMQ](http://zeromq.org/)
 - [NodeJS](https://nodejs.org/en/)
+- [Mongodb](https://docs.mongodb.org/manual/installation/)
 
 
 Installation
@@ -68,7 +84,7 @@ Run
     npm start
 
 
-Using judgebot from command line
+Using judge-backend from command line
 ================================
 
 The judge-backend can be used with [curl](https://en.wikipedia.org/wiki/CURL), here you have some examples.
