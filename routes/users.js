@@ -11,6 +11,13 @@ module.exports = function(app, mountPoint) {
     });
   });
 
+  router.get('/:id', function(req, res) {
+    User.findOne({_id: req.body._id}, function(err, data) {
+      if (err) throw err;
+      res.json(data);
+    });
+  });
+
   router.post('/', function(req, res) {
     User.create(req.body, function(err, data) {
       if (err) throw err;
