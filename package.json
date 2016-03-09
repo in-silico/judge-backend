@@ -27,6 +27,7 @@
     "connect-mongo": "^1.1.0",
     "cors": "^2.7.1",
     "debug": "^2.2.0",
+    "deque-ds": "^1.0.3",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
     "kerberos": "0.0.17",
@@ -35,6 +36,7 @@
     "multer": "^1.1.0",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
+    "stream-set": "^1.1.0",
     "tar.gz": "^1.0.3"
   }
 }
