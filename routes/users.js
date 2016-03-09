@@ -12,7 +12,7 @@ module.exports = function(app, mountPoint) {
   });
 
   router.get('/:id', function(req, res) {
-    User.findOne({_id: req.body._id}, function(err, data) {
+    User.find({_id: req.params.id}, function(err, data) {
       if (err) throw err;
       res.json(data);
     });
@@ -25,16 +25,16 @@ module.exports = function(app, mountPoint) {
     });
   });
 
-  router.put('/', function(req, res) {
-    User.update({_id: req.body._id}, req.body, function(err, data) {
+  router.put('/:id', function(req, res) {
+    User.update({_id: req.params.id}, req.body, function(err, data) {
       if (err) throw err;
       res.json(data);
       console.log(req.body);
     });
   });
 
-  router.delete('/', function(req, res) {
-    User.remove({_id: req.body._id}, function(err, data) {
+  router.delete('/:id', function(req, res) {
+    User.remove({_id: req.params.id}, function(err, data) {
       if (err) throw err;
       console.log('The user has been removed');
     });

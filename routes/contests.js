@@ -40,15 +40,15 @@ module.exports = function(app, mountPoint) {
     })
   });
 
-  router.put('/', function(req, res) {
-    Contest.update({_id: req.body._id}, req.body, function(err, data) {
+  router.put('/:id', function(req, res) {
+    Contest.update({_id: req.params.id}, req.body, function(err, data) {
       if (err) throw err;
       res.json(data);
     });
   });
 
-  router.delete('/', function(req, res) {
-    Contest.remove({_id: req.body._id}, function(err, data) {
+  router.delete('/:id', function(req, res) {
+    Contest.remove({_id: req.params.id}, function(err, data) {
       if (err) throw err;
       console.log('The contest has been removed');
     });
