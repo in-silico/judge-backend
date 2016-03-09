@@ -9,7 +9,8 @@ var Submission = require('../models/submission');
 module.exports = function(app, mountPoint) {
   router.get('/', function(req, res) {
     Submission.find(function(err, data) {
-      if (err) throw err;
+      if (err)
+        return res.status(500).json(err);
       res.json(data);
     });
   });
@@ -17,14 +18,16 @@ module.exports = function(app, mountPoint) {
   router.post('/', upload.any(), function(req, res) {
     req.body.source_code = req.files;
     Submission.create(req.body, function(err, data) {
-      if (err) throw err;
+      if (err)
+        return res.status(500).json(err);
       res.json(data);
     });
   });
 
   router.get('/pending', function(req, res) {
     Submission.find({status: 'pending'}, function(err, data) {
-      if (err) throw err;
+      if (err)
+        return res.status(500).json(err);
       res.json(data);
     })
   })
