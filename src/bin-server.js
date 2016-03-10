@@ -4,11 +4,13 @@ var data = {
   _id: "56ca75039e43598422cb3064",
   path: "data/submissions/fa95908e5ad145ad5b05363e0c9c9d3d",
   volumen: "data/problems/4614da7f5a1f5a6c7c98c7fd4ed04122_data",
+  runs: "data/runs",
   memory_limit: "250",
   time_limit: "3.5",
-  compilation: "/usr/bin/g++ -o2 -static -pipe -o source source.cpp",
-  execution: "./source < main.in > main.out",
-  checker: "checker.cpp",
+  compilation: "/usr/bin/g++ -o2 -static -pipe -o Main Main.cpp",
+  execution: "./Main < main.in > main.out",
+  extension: "cpp",
+  checker: "data/problems/4614da7f5a1f5a6c7c98c7fd4ed04122_data/checker.cpp",
   testcases: [
     {
       in: "data/problems/4614da7f5a1f5a6c7c98c7fd4ed04122_data/1.in",
