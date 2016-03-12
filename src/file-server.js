@@ -4,6 +4,9 @@ var path = require('path');
 var StreamSet = require('stream-set');
 var Deque = require('deque-ds');
 
+var util = require('util');
+var events = require('events');
+
 module.exports = JServer;
 
 var self;
@@ -15,9 +18,12 @@ function JServer(opts) {
   this.actives = StreamSet();
   this.pending = Deque();
   this.bots = Deque();
+  events.EventEmitter.call(this);
 
   self = this;
 }
+
+util.inherits(JServer, events.EventEmitter);
 
 JServer.prototype.start = function(cb) {
   self.server = net.createServer(self.handleConnection);
@@ -64,7 +70,7 @@ JServer.prototype.handleFile = function(socket, data) {
 }
 
 JServer.prototype.handleJudgement = function(socket, data) {
-  // TODO: self.emmit('judgement', data);
+  self.emit('judgement', data);
   console.log('judgement', data);
   self.bots.push_back(socket);
   self.checkPending();
