@@ -11,6 +11,12 @@ module.exports = function(app, mountPoint) {
     })
   });
 
+  router.get('/withProblems/:id', function (req, res) {
+    Contest.findWithProblems(req.params.id, function (err, contest) {
+      res.json(contest);
+    });
+  });
+
   router.get('/:id', function(req, res) {
     Contest.find({_id: req.params.id}, function(err, ans) {
       if (err)
