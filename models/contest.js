@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 // Contest-problem schema
 var cpSchema = new Schema({
   memory_limit: {type: Number, default: 256},
-  problem_id: { type: String, default: '' },
+  problem_id: { type: String, default: '', ref: 'Problem'},
   time_limit: { type: Number, default: 2}
 });
 
@@ -21,7 +21,14 @@ contestSchema.methods.addProblems = function(toAdd, cb) {
   }
 
   this.save(cb);
-}
+};
+
+contestSchema.statics.findWithProblems = function (id, cb) {
+  this
+    .findById(id)
+    .populate('problems.problem_id')
+    .exec(cb)
+};
 
 var Contest = mongoose.model('Contest', contestSchema);
 module.exports = Contest;
