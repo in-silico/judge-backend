@@ -28,12 +28,14 @@ util.inherits(JServer, events.EventEmitter);
 JServer.prototype.start = function(cb) {
   self.server = net.createServer(self.handleConnection);
   self.server.listen(self._port, function () {
-    cb(self.server);
+    if (cb)
+      cb(self.server);
   });
 }
 
 JServer.prototype.handleConnection = function(socket) {
   self.actives.add(socket);
+  self.bots.push_back(socket);
   self.checkPending();
 
   socket.on('data', function(data) {
@@ -71,7 +73,6 @@ JServer.prototype.handleFile = function(socket, data) {
 
 JServer.prototype.handleJudgement = function(socket, data) {
   self.emit('judgement', data);
-  console.log('judgement', data);
   self.bots.push_back(socket);
   self.checkPending();
 }
@@ -98,9 +99,11 @@ JServer.prototype.push = function(data) {
 }
 
 JServer.prototype.checkPending = function() {
-  console.log('pending', self.pending.size() + ' pendings on ' + self.bots.size() + ' bots');
+  console.log('pending', self.pending.size() +
+      ' pendings on ' + self.bots.size() + ' bots');
 
   if (self.pending.size() == 0) return;
-  if (self.judge(self.pending.front()))
+  if (self.judge(self.pending.front())) {
     self.pending.pop_front();
+  }
 }

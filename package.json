@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "mkdir -p data && mkdir -p data/submissions && mkdir -p data/problems",
     "start": "node bin/www",
+    "start-dev": "DEBUG=judge-backend:* nodemon bin/www",
     "test": "tap test/*.js"
   },
   "repository": {
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/in-silico/judge-backend#readme",
   "devDependencies": {
+    "nodemon": "^1.9.2",
     "tap": "^5.0.1"
   },
   "dependencies": {

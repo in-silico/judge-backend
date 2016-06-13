@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 // Contest-problem schema
 var cpSchema = new Schema({
-  memory_limit: {type: Number, default: 256},
+  memory_limit: {type: String, default: '256'},
   problem_id: { type: String, default: '' },
-  time_limit: { type: Number, default: 2}
+  time_limit: { type: String, default: '2'}
 });
 
 var contestSchema = new Schema({
@@ -19,7 +19,6 @@ contestSchema.methods.addProblems = function(toAdd, cb) {
     var problem = toAdd[i];
     this.problems.push(problem);
   }
-
   this.save(cb);
 }
 
