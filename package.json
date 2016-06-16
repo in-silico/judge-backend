@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "mkdir -p data && mkdir -p data/submissions && mkdir -p data/problems",
     "start": "node bin/www",
+    "start-dev": "DEBUG=judge-backend:* nodemon bin/www",
     "test": "tap test/*.js"
   },
   "repository": {
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/in-silico/judge-backend#readme",
   "devDependencies": {
+    "nodemon": "^1.9.2",
     "tap": "^5.0.1"
   },
   "dependencies": {
@@ -27,14 +29,18 @@
     "connect-mongo": "^1.1.0",
     "cors": "^2.7.1",
     "debug": "^2.2.0",
+    "deque-ds": "^1.0.3",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
+    "gunzip-maybe": "^1.3.1",
     "kerberos": "0.0.17",
+    "mkdirp": "^0.5.1",
     "mongoose": "^4.3.5",
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
-    "tar.gz": "^1.0.3"
+    "tar-stream": "^1.3.2",
+    "stream-set": "^1.1.0"
   }
 }

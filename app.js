@@ -31,8 +31,6 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-
-
 mongoose.connect(config.db.url);
 app.db = mongoose.connection;
 

@@ -1,7 +1,9 @@
 var express = require('express'),
     multer  = require('multer'),
     path    = require('path'),
-    targz   = require('tar.gz'),
+    gunzip = require('gunzip-maybe'),
+    tarStream = require('tar-stream'),
+    mkdirp = require('mkdirp'),
     fs = require('fs');
 
 var router  = express.Router();
@@ -54,31 +56,44 @@ function handleTar(req, res) {
   }
 
   var read = fs.createReadStream(req.files[0].path);
-  var write = targz().createWriteStream(req.files[0].path + '_data');
-
-  var inputs = {};
-  var outputs = {};
-
-  write.on('entry', function(entry) {
-    if (path.extname(entry.path) === '.in')
-      inputs[entry.path] = true;
-    else if (path.extname(entry.path) === '.out')
-      outputs[entry.path] = true;
-  });
+  var extract = tarStream.extract();
+  read.pipe(gunzip()).pipe(extract);
 
   var basename = req.files[0].path + '_data/';
+  mkdirp(basename, function() {
 
-  write.on('end', function() {
-    var testCases = [];
-    for (var i in inputs) {
-      var output = path.basename(i, '.in') + '.out';
-      if (output in outputs)
-        testCases.push({input: basename + i, output: basename + output});
-    }
-    saveTestCases(req, res, testCases);
+    var inputs = {};
+    var outputs = {};
+
+    extract.on('entry', function(entry, stream, cb) {
+      if (entry.type === 'file') {
+        stream.pipe(fs.createWriteStream(path.join(basename, entry.name)));
+        stream.on('end', cb);
+        var name = path.join(entry.name);
+        if (path.extname(name) === '.in')
+          inputs[name] = true;
+        else if (path.extname(name) === '.out')
+          outputs[name] = true;
+      } else {
+        cb();
+      }
+    })
+
+    extract.on('error', function(err) {
+      console.log('error ):', err);
+      res.status(500).json({ok: false, error: err});
+    });
+
+    extract.on('finish', function() {
+      var testCases = [];
+      for (var i in inputs) {
+        var output = path.join(path.dirname(i), path.basename(i, '.in') + '.out');
+        if (output in outputs)
+          testCases.push({input: basename + i, output: basename + output});
+      }
+      saveTestCases(req, res, testCases);
+    });
   });
-
-  read.pipe(write);
 }
 
 module.exports = function(app, mountPoint) {

@@ -10,7 +10,10 @@ var problemSchema = new Schema({
   author: { type: String, default: '' },
   description: { type: String, default: '' },
   testcases: [testCaseSchema],
-  title: { type: String, default: '' }
+  title: { type: String, default: '' },
+  memory_limit: {type: String, default: '256'},
+  time_limit: { type: String, default: '2'}
+
 }, {timestamps : true});
 
 problemSchema.methods.addTestCases = function(tc, cb) {
