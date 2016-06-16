@@ -42,9 +42,11 @@ The second aim for this backend service is to talk with the
 
 All the messages are sent through TCP connections and must be parsable to JSON arrays.
 
-*Important:* All the messages must be ended with the '\0'  character.
+**Important:** All the messages must be ended with the '\0'  character.
 
 The first element in the array defines the type of the operation.
+
+The **exact** message schema is outlined [here](https://github.com/in-silico/judge-bot#bot-api)
 
 ### bot-to-backend messages.
 
