@@ -21,7 +21,8 @@ function addEventListeners (app) {
   });
 }
 
-function parseSubmission (data) {
+function parseSubmission (d) {
+  var data = JSON.parse(JSON.stringify(d));
   data.testcases = data.problem_id.testcases;
   data.path = data.source_code[0].path;
   data.volumen = 'data/problems';
@@ -30,8 +31,11 @@ function parseSubmission (data) {
   data.time_limit = data.problem_id.time_limit || '2';
   data.compilation = "/usr/bin/g++ -o2 -static -pipe -o Main Main.cpp";
   data.execution = "./Main < main.in > main.out";
-  data.extension = "cpp";
+  data.extension = ".cpp";
   data.checker = 'data/default_checker.cpp';
+
+  delete data.problem_id;
+  delete data.source_code;
   return data;
 }
 
@@ -40,9 +44,9 @@ function addPendingSubmissions () {
       function(err, data) {
 
     if (err) throw err;
-    for (var i = 0; i < data.length; ++i) {
-      jserver.push(parseSubmission(data[i]));
-    }
+    data.forEach(function (cur) {
+      jserver.push(parseSubmission(cur));
+    });
   });
 }
 
