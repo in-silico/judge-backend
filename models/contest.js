@@ -3,18 +3,36 @@ var Schema = mongoose.Schema;
 
 // Contest-problem schema
 var cpSchema = new Schema({
-  memory_limit: {type: String, default: '256'},
-  problem_id: { type: String, default: '', ref: 'Problem'},
-  time_limit: { type: String, default: '2'}
+  memory_limit: {
+    type: String,
+    default: '256'
+  },
+  problem_id: {
+    type: String,
+    default: '',
+    ref: 'Problem'
+  },
+  time_limit: {
+    type: String,
+    default: '2'
+  }
 });
 
 var contestSchema = new Schema({
-  description: { type: String, default: '' },
+  description: {
+    type: String,
+    default: ''
+  },
   problems: [cpSchema],
-  title: { type: String, default: '' }
-}, {timestamps : true});
+  title: {
+    type: String,
+    default: ''
+  }
+}, {
+  timestamps: true
+});
 
-contestSchema.methods.addProblems = function(toAdd, cb) {
+contestSchema.methods.addProblems = function (toAdd, cb) {
   for (var i = 0; i < toAdd.length; ++i) {
     var problem = toAdd[i];
     this.problems.push(problem);
@@ -26,7 +44,7 @@ contestSchema.statics.findWithProblems = function (id, cb) {
   this
     .findById(id)
     .populate('problems.problem_id')
-    .exec(cb)
+    .exec(cb);
 };
 
 var Contest = mongoose.model('Contest', contestSchema);

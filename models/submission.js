@@ -7,23 +7,23 @@ var submSchema = new Schema({
   source_code: { type: Array, default: [] },
   status: {type: String, default: 'pending', index: true},
   user_id: { type: String, default: '' }
-}, {timestamps : true});
+}, {timestamps: true});
 
 submSchema.statics.findByIdWithTestCases = function (id, cb) {
   this
     .findById(id)
     .populate('problem_id')
     .lean()
-    .exec(cb)
-}
+    .exec(cb);
+};
 
 submSchema.statics.findWithTestCases = function (query, cb) {
   this
     .find(query)
     .populate('problem_id')
     .lean()
-    .exec(cb)
-}
+    .exec(cb);
+};
 
 var Submission = mongoose.model('Submission', submSchema);
 module.exports = Submission;

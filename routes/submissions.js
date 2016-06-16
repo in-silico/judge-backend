@@ -1,9 +1,11 @@
-var express = require('express'),
-    multer  = require('multer'),
-    path    = require('path'),
-    jserver = require('../src/file-server')({dir: './'});
+var express = require('express');
+var multer = require('multer');
+var jserver = require('../src/file-server')({dir: './'});
 
-var upload = multer({dest: 'data/submissions/'});
+var upload = multer({
+  dest: 'data/submissions/'
+});
+
 var router = express.Router();
 
 var Submission = require('../models/submission');
@@ -20,10 +22,15 @@ function addEventListeners (app) {
         verdict = data.verdict[i].verdict;
       }
     }
-    Submission.update({_id: data._id},
-      { $set: {status: verdict}},
-      function (err, sub) {
-        if (err) return;
+    Submission.update({
+      _id: data._id
+    }, {
+      $set: {
+        status: verdict
+      }
+    },
+    function (err, sub) {
+      if (err) return;
     });
   });
 }
@@ -36,9 +43,9 @@ function parseSubmission (d) {
   data.runs = 'data/runs';
   data.memory_limit = data.problem_id.memory_limit || '256';
   data.time_limit = data.problem_id.time_limit || '2';
-  data.compilation = "/usr/bin/g++ -o2 -static -pipe -o Main Main.cpp";
-  data.execution = "./Main < main.in > main.out";
-  data.extension = ".cpp";
+  data.compilation = '/usr/bin/g++ -o2 -static -pipe -o Main Main.cpp';
+  data.execution = './Main < main.in > main.out';
+  data.extension = '.cpp';
   data.checker = 'data/default_checker.cpp';
 
   delete data.problem_id;
@@ -48,55 +55,57 @@ function parseSubmission (d) {
 
 function addPendingSubmissions () {
   Submission.findWithTestCases({status: 'pending'},
-      function(err, data) {
-
-    if (err) throw err;
-    data.forEach(function (cur) {
-      jserver.push(parseSubmission(cur));
+    function (err, data) {
+      if (err) throw err;
+      data.forEach(function (cur) {
+        jserver.push(parseSubmission(cur));
+      });
     });
-  });
 }
 
-function  addPendingSubmission(id) {
+function addPendingSubmission (id) {
   Submission.findByIdWithTestCases(id,
-      function(err, data) {
-
-    if (err) throw err;
-    jserver.push(parseSubmission(data));
-  });
+    function (err, data) {
+      if (err) {
+        throw err;
+      }
+      jserver.push(parseSubmission(data));
+    });
 }
 
-module.exports = function(app, mountPoint) {
-
+module.exports = function (app, mountPoint) {
   addEventListeners(app);
   addPendingSubmissions();
 
-  router.get('/', function(req, res) {
-    Submission.find(function(err, data) {
-      if (err)
+  router.get('/', function (req, res) {
+    Submission.find(function (err, data) {
+      if (err) {
         return res.status(500).json(err);
+      }
       res.json(data);
     });
   });
 
-  router.post('/', upload.any(), function(req, res) {
+  router.post('/', upload.any(), function (req, res) {
     req.body.source_code = req.files;
-    Submission.create(req.body, function(err, data) {
-      if (err)
+    Submission.create(req.body, function (err, data) {
+      if (err) {
         return res.status(500).json(err);
+      }
       res.json(data);
       addPendingSubmission(data._id);
     });
   });
 
-  router.get('/pending', function(req, res) {
-    Submission.find({status: 'pending'}, function(err, data) {
-      if (err)
+  router.get('/pending', function (req, res) {
+    Submission.find({status: 'pending'}, function (err, data) {
+      if (err) {
         return res.status(500).json(err);
+      }
       res.json(data);
-    })
-  })
+    });
+  });
 
   jserver.start();
-  app.use(mountPoint, router)
-}
+  app.use(mountPoint, router);
+};
