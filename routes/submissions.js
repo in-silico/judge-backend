@@ -11,13 +11,20 @@ var Submission = require('../models/submission');
 function addEventListeners (app) {
   jserver.on('judgement', function (data) {
     console.log('judgement result', data);
-    /*
+    console.log(data._id);
+    var ok = true;
+    var verdict = 'accepted';
+    for (var i = 0; i < data.verdict.length && ok; ++i) {
+      if (data.verdict[i].verdict !== 'OK') {
+        ok = false;
+        verdict = data.verdict[i].verdict;
+      }
+    }
     Submission.update({_id: data._id},
-      { $set: {status: data.verdict + ' tmp'}},
+      { $set: {status: verdict}},
       function (err, sub) {
         if (err) return;
     });
-    */
   });
 }
 
