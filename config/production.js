@@ -5,4 +5,4 @@ module.exports = {
   frontend: {
     url: 'http://judge.is/'
   }
-}
+};
