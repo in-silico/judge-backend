@@ -31,7 +31,7 @@
     "connect-mongo": "^1.1.0",
     "cors": "^2.7.1",
     "debug": "^2.2.0",
-    "deque-ds": "^1.0.3",
+    "deque-ds": "^2.0.1",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
     "gunzip-maybe": "^1.3.1",

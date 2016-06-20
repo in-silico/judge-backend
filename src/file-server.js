@@ -16,8 +16,8 @@ function JServer (opts) {
   this._dir = opts.dir || '../';
   this._port = opts.port || 7777;
   this.actives = StreamSet();
-  this.pending = Deque();
-  this.bots = Deque();
+  this.pending = new Deque();
+  this.bots = new Deque();
   events.EventEmitter.call(this);
 
   self = this;
@@ -36,7 +36,7 @@ JServer.prototype.start = function (cb) {
 
 JServer.prototype.handleConnection = function (socket) {
   self.actives.add(socket);
-  self.bots.push_back(socket);
+  self.bots.pushBack(socket);
   self.checkPending();
 
   socket.on('data', function (data) {
@@ -50,7 +50,7 @@ JServer.prototype.handleConnection = function (socket) {
       }
 
       if (op === 'ready') {
-        return self.bots.push_back(socket);
+        return self.bots.pushBack(socket);
       }
 
       if (op === 'file') {
@@ -77,28 +77,28 @@ JServer.prototype.handleFile = function (socket, data) {
 
 JServer.prototype.handleJudgement = function (socket, data) {
   self.emit('judgement', data);
-  self.bots.push_back(socket);
+  self.bots.pushBack(socket);
   self.checkPending();
 };
 
 JServer.prototype.judge = function (data) {
   while (!self.actives.has(self.bots.front()) &&
     self.bots.size() > 0) {
-    self.bots.pop_front();
+    self.bots.popFront();
   }
 
   if (self.bots.size() === 0) {
     return false;
   }
 
-  var cur = self.bots.pop_front();
+  var cur = self.bots.popFront();
   data = ['submission', data];
   cur.write(JSON.stringify(data) + '\0');
   return true;
 };
 
 JServer.prototype.push = function (data) {
-  self.pending.push_back(data);
+  self.pending.pushBack(data);
   self.checkPending();
 };
 
@@ -108,6 +108,6 @@ JServer.prototype.checkPending = function () {
 
   if (self.pending.size() === 0) return;
   if (self.judge(self.pending.front())) {
-    self.pending.pop_front();
+    self.pending.popFront();
   }
 };
