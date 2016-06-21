@@ -14,14 +14,17 @@ tap.test('mongodb operations', function (t) {
   var coolUser = {
     name: 'Judge user',
     email: 'user@judge.utp.edu.co',
-    username: 'i dont care'
+    username: 'cooluser',
+    password: 'some required passwd'
   };
 
   User.create(coolUser, function (err, doc) {
     t.false(err);
     User.find(function (err, users) {
       t.false(err);
-      tap.match(users[0], coolUser);
+      t.match(users[0].name, coolUser.name);
+      t.match(users[0].email, coolUser.email);
+      t.match(users[0].username, coolUser.username);
       mongoose.connection.close();
       t.end();
     });

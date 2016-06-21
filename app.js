@@ -5,12 +5,13 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var GithubStrategy = require('passport-github').Strategy;
 var passport = require('passport');
-var expressSession = require('express-session');
-var ConnectMongo = require('connect-mongo')(expressSession);
+var CN = require('cn-utils');
 
 var env = process.env.NODE_ENV || 'development';
 var config = require('./config/' + env);
 var oauth = require('./config/oauth');
+
+var User = require('./models/user');
 
 require('colors');
 
@@ -45,16 +46,11 @@ app.db.on('open', function () {
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(expressSession({
-  secret: 'keyboard cat',
-  store: new ConnectMongo({mongooseConnection: app.db, ttl: 60 * 60}),
-  resave: true,
-  saveUninitialized: true
-}));
 
 app.use(passport.initialize());
-app.use(passport.session());
 
+CN.configPassport(passport, User, config);
+require('./routes/auth-jwt')(app, User, config.secret, '/auth/jwt');
 require('./routes/users')(app, '/users');
 require('./routes/problems')(app, '/problems');
 require('./routes/submissions')(app, '/submissions');
