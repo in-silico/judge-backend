@@ -3,6 +3,22 @@ language: node_js
 services:
   - mongodb
 
+env:
+  - CXX=g++-5
+
+compiler:
+  - gcc
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-5
+
 node_js:
   - '6.2.1'
   - 'stable'
+
+before_install:
+  - $CXX --version
